@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: .docker/app/Dockerfile
     stop_signal: INT
-    command: ''
+    command: 'yarn start'
     entrypoint: ''
     tty: true
     volumes:
@@ -23,19 +23,19 @@ services:
     env_file:
       - .env
 
-  rabbitmq:
-    container_name: ${COMPOSE_PROJECT_NAME}_rabbitmq
-    image: rabbitmq:management
-    hostname: ${RABBITMQ_HOST}
-    volumes:
-      - ./.docker/rabbitmq/data:/var/lib/rabbitmq:rw
-    ports:
-      - ${RABBITMQ_MANAGEMENT_PORT}:8080
-      - ${RABBITMQ_CONNECTION_PORT}:5672
-      - ${RABBITMQ_GUI}:15672
-    environment:
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASSWORD}
+#  rabbitmq:
+#    container_name: ${COMPOSE_PROJECT_NAME}_rabbitmq
+#    image: rabbitmq:management
+#    hostname: ${RABBITMQ_HOST}
+#    volumes:
+#      - ./.docker/rabbitmq/data:/var/lib/rabbitmq:rw
+#    ports:
+#      - ${RABBITMQ_MANAGEMENT_PORT}:8080
+#      - ${RABBITMQ_CONNECTION_PORT}:5672
+#      - ${RABBITMQ_GUI}:15672
+#    environment:
+#      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+#      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASSWORD}
 
 #  elasticsearch:
 #    container_name: ${COMPOSE_PROJECT_NAME}_elasticsearch

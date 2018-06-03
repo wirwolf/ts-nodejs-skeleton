@@ -1,0 +1,45 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "yarn build && yarn app",
+    "build": "webpack --mode development",
+    "app": "nodemon ./dist/app.js",
+    "test": "mocha -r ts-node/register test/index.test.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.0.10",
+    "@types/mocha": "^2.2.45",
+    "awesome-typescript-loader": "^3.1.2",
+    "chai": "^3.5.0",
+    "clean-webpack-plugin": "^0.1.17",
+    "istanbul-instrumenter-loader": "^2.0.0",
+    "mocha": "^3.2.0",
+    "node-loader": "^0.6.0",
+    "phantomjs-prebuilt": "^2.1.14",
+    "source-map-loader": "^0.2.3",
+    "ts-loader": "^4.2.0",
+    "ts-node": "^5.0.1",
+    "tsconfig-paths": "^3.3.1",
+    "tsconfig-paths-webpack-plugin": "^3.0.4",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.2",
+    "webpack-cli": "^2.0.10",
+    "webpack-node-externals": "^1.6.0"
+  },
+  "dependencies": {
+    "@types/async": "^2.0.49",
+    "@types/underscore": "^1.8.8",
+    "async": "^2.6.0",
+    "bluebird": "^3.5.1",
+    "dotenv": "^5.0.1",
+    "json-loader": "^0.5.7",
+    "ts-loader": "^4.2.0",
+    "typedoc": "^0.11.1",
+    "v8-profiler": "^5.7.0",
+    "webpack": "^4.1.0",
+  }
+}
