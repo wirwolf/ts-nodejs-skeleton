@@ -1,0 +1,95 @@
+version: "3.4"
+services:
+  app:
+    container_name: ${COMPOSE_PROJECT_NAME}_app
+    image: node:9
+    build:
+      context: .
+      dockerfile: .docker/app/Dockerfile
+    stop_signal: INT
+    command: ''
+    entrypoint: ''
+    tty: true
+    volumes:
+      - ./app/:/app/
+#    depends_on:
+#      - rabbitmq
+#      - elasticsearch
+#      - mongodb
+#      - mysql
+#      - redis
+#    ports:
+#      - ${APP_API_PORT}:3000
+    env_file:
+      - .env
+
+  rabbitmq:
+    container_name: ${COMPOSE_PROJECT_NAME}_rabbitmq
+    image: rabbitmq:management
+    hostname: ${RABBITMQ_HOST}
+    volumes:
+      - ./.docker/rabbitmq/data:/var/lib/rabbitmq:rw
+    ports:
+      - ${RABBITMQ_MANAGEMENT_PORT}:8080
+      - ${RABBITMQ_CONNECTION_PORT}:5672
+      - ${RABBITMQ_GUI}:15672
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASSWORD}
+
+#  elasticsearch:
+#    container_name: ${COMPOSE_PROJECT_NAME}_elasticsearch
+#    image: elasticsearch:2.4.6-alpine
+#    volumes:
+#      - ./.docker/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+#      - ./.docker/elasticsearch/config/logging.yml:/usr/share/elasticsearch/config/logging.yml:ro
+#      - ./.docker/elasticsearch/data:/usr/share/elasticsearch/data:rw
+#    ports:
+#      - ${ELASTIC_PORT}:9200
+
+#  mongodb:
+#    container_name: ${COMPOSE_PROJECT_NAME}_mongodb
+#    image: mongo:3.4.6
+#    command: mongod --config /etc/mongod.conf
+#    volumes:
+#      - ./.docker/mongodb/config/mongod.conf:/etc/mongod.conf:ro
+#      - ./.docker/mongodb/initdb:/docker-entrypoint-initdb.d/:ro
+#      - ./.docker/mongodb/data:/data/db:rw
+#      - ./.docker/mongodb/logs:/var/log/mongodb:rw
+#    environment:
+#      MONGO_INITDB_DATABASE: ${MONGO_DB_NAME}
+#      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+#      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+#    ports:
+#      - ${MONGO_PORT}:27017
+#
+#  mysql:
+#    container_name: ${COMPOSE_PROJECT_NAME}_mysql
+#    image: percona:5.6
+#    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --init-connect='SET NAMES UTF8MB4;' --innodb-flush-log-at-trx-commit=0
+#    volumes:
+#     - ./.docker/mysql/config/my.cfg:/etc/mysql/my.cnf:ro
+#     - ./.docker/mysql/initdb:/docker-entrypoint-initdb.d/:ro
+#     - ./.docker/mysql/data:/var/lib/mysql:rw
+#     - ./.docker/mysql/logs:/var/log/mysql:rw
+#    environment:
+#      MYSQL_DATABASE: ${MYSQL_DATABASE}
+#      MYSQL_USER: ${MYSQL_USER}
+#      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+#      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+#    ports:
+#      - ${MYSQL_PORT}:3306
+
+#  redis:
+#    container_name: ${COMPOSE_PROJECT_NAME}_redis
+#    image: redis:4
+#    command: 'redis-server /usr/local/etc/redis/redis.conf'
+#    volumes:
+#      - ./.docker/redis/config/redis.conf:/usr/local/etc/redis/redis.conf:ro
+#      - ./.docker/redis/data:/data:rw
+#    ports:
+#      - ${REDIS_PORT}:6379
+
+networks:
+  outside:
+    external: true
