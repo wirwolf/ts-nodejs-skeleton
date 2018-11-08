@@ -1,2 +1,5 @@
-*/logs/*
 */data/*
+!*/data/.gitkeep
+
+*/logs/*
+!*/logs/.gitkeep
