@@ -2,13 +2,12 @@ version: "3.4"
 services:
   app:
     container_name: ${COMPOSE_PROJECT_NAME}_app
-    image: node:9
     build:
       context: .
       dockerfile: .docker/app/Dockerfile
     stop_signal: INT
-    command: 'yarn start'
-    entrypoint: ''
+#    command: 'yarn start'
+#    entrypoint: ''
     tty: true
     volumes:
       - ./app/:/app/
