@@ -9,6 +9,7 @@ clear:
 	sudo rm -rf .docker/*/data/*
 	sudo rm -rf .docker/rabbitmq/data/.erlang.cookie
 
+	sudo rm -rf app/dist
 	sudo rm -rf app/node_modules
 	sudo rm -rf app/yarn-error.log
 
